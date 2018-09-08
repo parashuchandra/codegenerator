@@ -62,13 +62,13 @@ public class SampleRestController {
             document.add(qrcodeImage);
 
             document.close();
-            return document.toString();
+            return "success";
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        return "welcome";
+        return "error";
     }
 
     @GetMapping("/image")
