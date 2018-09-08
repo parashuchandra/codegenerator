@@ -35,7 +35,7 @@ import java.util.Map;
 public class SampleRestController {
 
     @GetMapping("/pdf")
-    public String qr(@RequestParam String value) throws IOException {
+    public String pdfFormat(@RequestParam String value) throws IOException {
         try {
             String barcodeString = value.trim();
             Document document = new Document();
