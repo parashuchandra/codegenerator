@@ -38,7 +38,7 @@ public class SampleRestController {
         try {
             String barcodeString = value.trim();
             Document document = new Document();
-            File outputFile = new File("C:/Users/Ram/IdeaProjects/qrcode2/src/main/resources/pdf/"+"generator.pdf");
+            File outputFile = new File("generator.pdf");
             outputFile.createNewFile();
             OutputStream outputStream = new FileOutputStream(outputFile);
             PdfWriter pdfWriter = PdfWriter.getInstance(document, outputStream);
@@ -50,18 +50,14 @@ public class SampleRestController {
             barcode128.setCode(barcodeString);
             barcode128.setCodeType(Barcode128.CODE128);
             Image code128Image = barcode128.createImageWithBarcode(pdfContentByte, null, null);
-            //code128Image.setAbsolutePosition(10, 700);
+            code128Image.setAbsolutePosition(50, 700);
             code128Image.scalePercent(100);
-            code128Image.setCompressionLevel(-1);
-            code128Image.setOriginalType(Image.ORIGINAL_PNG);
             document.add(code128Image);
 
-            BarcodeQRCode barcodeQrcode = new BarcodeQRCode(barcodeString, 1, 1, null);
+            BarcodeQRCode barcodeQrcode = new BarcodeQRCode(barcodeString, 100, 100, null);
             Image qrcodeImage = barcodeQrcode.getImage();
-            //qrcodeImage.setAbsolutePosition(10, 500);
+            qrcodeImage.setAbsolutePosition(50, 500);
             qrcodeImage.scalePercent(100);
-            qrcodeImage.setOriginalType(Image.ORIGINAL_PNG);
-            qrcodeImage.setCompressionLevel(-1);
             document.add(qrcodeImage);
 
             document.close();
@@ -85,7 +81,7 @@ public class SampleRestController {
         barcode128Bean.setModuleWidth(UnitConv.in2mm(5.0f / dpi));
         barcode128Bean.doQuietZone(false);
         //Open output file
-        File outputFile = new File("C:/Users/Ram/IdeaProjects/qrcode2/src/main/resources/images" + "/" + "barcode.png");
+        File outputFile = new File("barcode.png");
         outputFile.createNewFile();
         OutputStream out = new FileOutputStream(outputFile);
         try {
@@ -105,7 +101,7 @@ public class SampleRestController {
     public void qrCode(String value) throws IOException {
         String myCodeText = value.trim();
         int size = 250;
-        File myFile = new File("C:/Users/Ram/IdeaProjects/qrcode2/src/main/resources/images" + "/" + "qrcode.png");
+        File myFile = new File("qrcode.png");
         myFile.createNewFile();
         try {
 
