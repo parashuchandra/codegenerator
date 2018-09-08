@@ -13,6 +13,7 @@ import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.krysalis.barcode4j.HumanReadablePlacement;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.impl.code128.Code128Constants;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
@@ -76,18 +77,20 @@ public class SampleRestController {
         Code128Bean barcode128Bean = new Code128Bean();
         barcode128Bean.setCodeset(Code128Constants.CODESET_B);
         final int dpi = 100;
-        //Configure the barcode generator
-        //adjust barcode width here
-        barcode128Bean.setModuleWidth(UnitConv.in2mm(5.0f / dpi));
-        barcode128Bean.doQuietZone(false);
-        //Open output file
+
+        barcode128Bean.setBarHeight(15.0);
+        barcode128Bean.setFontSize(8);
+        barcode128Bean.setQuietZone(5.0);
+        barcode128Bean.doQuietZone(true);
+        barcode128Bean.setModuleWidth(UnitConv.in2mm(3.2f / dpi));
+        barcode128Bean.setMsgPosition(HumanReadablePlacement.HRP_BOTTOM);
+
         File outputFile = new File("barcode.png");
         outputFile.createNewFile();
         OutputStream out = new FileOutputStream(outputFile);
         try {
             BitmapCanvasProvider canvasProvider = new BitmapCanvasProvider(
                     out, "image/x-png", dpi, BufferedImage.TYPE_BYTE_BINARY, false, 0);
-
             barcode128Bean.generateBarcode(canvasProvider, barcodeString);
 
             canvasProvider.finish();
