@@ -45,8 +45,7 @@ public class SampleRestController {
                 return "empty value";
             }
             //Adding filename
-            String filename = fileNameCreation(barcodeString);
-            File outputFile = new File("src/main/resources/static/" + filename + ".pdf");
+            File outputFile = new File("src/main/resources/static/" + "barcode.pdf");
             outputFile.createNewFile();
             OutputStream outputStream = new FileOutputStream(outputFile);
             PdfWriter pdfWriter = PdfWriter.getInstance(document, outputStream);
@@ -69,7 +68,7 @@ public class SampleRestController {
             document.add(qrcodeImage);
 
 
-            return filename;
+            return "success";
         } catch (FileNotFoundException e) {
             System.out.println("Exception: " + e.toString());
         } catch (DocumentException e) {
@@ -99,8 +98,7 @@ public class SampleRestController {
         barcode128Bean.setModuleWidth(UnitConv.in2mm(3.2f / dpi));
         barcode128Bean.setMsgPosition(HumanReadablePlacement.HRP_BOTTOM);
 
-        String filename = fileNameCreation(barcodeString);
-        File outputFile = new File("src/main/resources/static/barcode-" + filename + ".png");
+        File outputFile = new File("src/main/resources/static/" + "barcode.png");
         outputFile.createNewFile();
         OutputStream out = new FileOutputStream(outputFile);
         try {
@@ -110,7 +108,7 @@ public class SampleRestController {
 
             canvasProvider.finish();
             qrCode(value);
-            return filename;
+            return "success";
         } catch (FileNotFoundException e) {
             System.out.println("Exception: " + e.toString());
         } catch (RuntimeException e) {
@@ -124,8 +122,7 @@ public class SampleRestController {
     public void qrCode(String value) throws IOException {
         String myCodeText = value.trim();
         int size = 250;
-        String filename = fileNameCreation(myCodeText);
-        File myFile = new File("src/main/resources/static/qrcode-" + filename + ".png");
+        File myFile = new File("src/main/resources/static/" + "qrcode.png");
         myFile.createNewFile();
         try {
 
@@ -166,16 +163,4 @@ public class SampleRestController {
         System.out.println("\n\nYou have successfully created QR Code.");
     }
 
-
-    private String fileNameCreation (String name) {
-        String filename = name.replaceAll("[^a-zA-Z0-9]", "");
-        // Randomizing filename if no alphabet or number is present in the value
-        if("" == filename || filename == null) {
-
-            Random random = new Random();
-            random.ints(1,(1000)).findFirst().getAsInt();
-            filename = "temp-"+random.toString();
-        }
-        return filename;
-    }
 }
