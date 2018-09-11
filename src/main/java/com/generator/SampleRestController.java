@@ -45,7 +45,7 @@ public class SampleRestController {
                 return "empty value";
             }
             //Adding filename
-            File outputFile = new File("src/main/resources/static/" + "barcode.pdf");
+            File outputFile = new File("target/classes/static/" + "barcode.pdf");
             outputFile.createNewFile();
             OutputStream outputStream = new FileOutputStream(outputFile);
             PdfWriter pdfWriter = PdfWriter.getInstance(document, outputStream);
@@ -98,7 +98,7 @@ public class SampleRestController {
         barcode128Bean.setModuleWidth(UnitConv.in2mm(3.2f / dpi));
         barcode128Bean.setMsgPosition(HumanReadablePlacement.HRP_BOTTOM);
 
-        File outputFile = new File("src/main/resources/static/" + "barcode.png");
+        File outputFile = new File("target/classes/static/" + "barcode.png");
         outputFile.createNewFile();
         OutputStream out = new FileOutputStream(outputFile);
         try {
@@ -122,7 +122,7 @@ public class SampleRestController {
     public void qrCode(String value) throws IOException {
         String myCodeText = value.trim();
         int size = 250;
-        File myFile = new File("src/main/resources/static/" + "qrcode.png");
+        File myFile = new File("target/classes/static/" + "qrcode.png");
         myFile.createNewFile();
         try {
 
