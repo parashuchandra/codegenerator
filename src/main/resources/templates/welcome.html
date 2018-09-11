@@ -13,23 +13,21 @@
             $('#rDataPDF').hide();
             $('#rDataImage').hide();
             $('#imagebtn').click(function () {
-                $('#rDataPDF').hide();
-                $('#rDataImage').hide();
                 var variable = document.getElementById("input").value;
                 var url = "/generate/image?value="+variable;
                 $.get(url, function (data,status) {
-                    if(data === 'success'){
+                    alert("Data: " + data + "\nStatus: " + status);
+                    if(data!=null){
                         $('#rDataImage').show();
                     }
                 });
             })
             $('#pdfbtn').click(function () {
-                $('#rDataPDF').hide();
-                $('#rDataImage').hide();
                 var variable = document.getElementById("input").value;
                 var url = "/generate/pdf?value="+variable;
                 $.get(url, function (data,status) {
-                    if(data === 'success'){
+                    alert("Data: " + data + "\nStatus: " + status);
+                    if(data!=null){
                         $('#rDataPDF').show();
                     }
                 });
