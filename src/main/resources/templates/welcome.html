@@ -18,7 +18,7 @@
                 var variable = document.getElementById("input").value;
                 var url = "/generate/image?value="+variable;
                 $.get(url, function (data,status) {
-                    if(data!=null){
+                    if(data === 'success'){
                         $('#rDataImage').show();
                     }
                 });
@@ -29,7 +29,7 @@
                 var variable = document.getElementById("input").value;
                 var url = "/generate/pdf?value="+variable;
                 $.get(url, function (data,status) {
-                    if(data!=null){
+                    if(data === 'success'){
                         $('#rDataPDF').show();
                     }
                 });
